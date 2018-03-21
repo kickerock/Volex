@@ -1,0 +1,224 @@
+$breakpoint-small: 600px;
+$breakpoint-med-small: 960px;
+$breakpoint-med: 1175px;
+@mixin screen($size, $type: max, $pixels: $breakpoint-small) {
+  @if $size == 'small' {
+    @media screen and ($type + -width: $breakpoint-small) {
+      @content;
+    }
+  } @else
+  if $size == 'med-small' {
+    @media screen and ($type + -width: $breakpoint-med-small) {
+      @content;
+    }
+  } @else
+  if $size == 'med' {
+    @media screen and ($type + -width: $breakpoint-med) {
+      @content;
+    }
+  } @else
+  if $size == 'large' {
+    @media screen and ($type + -width: $breakpoint-med) {
+      @content;
+    }
+  } @else
+  if $size == 'custom' {
+    @media screen and ($type + -width: $pixels + px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+@function calcR($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+@mixin background($imgpath,$positionx: center,$positiony: top,$size: 100%,$repeat: no-repeat) {
+  background: {
+    image: url($imgpath);
+    position-x: $positionx;
+    position-y: $positiony;
+    repeat: $repeat;
+    size: $size;
+  }
+}
+// d-flex
+@mixin flex {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+// d-flex align-items-center justify-content-center
+@mixin flexaj($align:center,$justify:center) {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  @if $align == flex-start {
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+  } @else
+  if $align == flex-end {
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $align;
+    -moz-box-align: $align;
+    -ms-flex-align: $align;
+  }
+  -webkit-align-items: $align;
+  align-items: $align;
+
+  @if $justify == flex-start {
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-flex-pack: start;
+  } @else
+  if $justify == flex-end {
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+  } @else
+  if $justify == space-between {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else
+  if $justify == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $justify;
+    -moz-box-pack: $justify;
+    -ms-flex-pack: $justify;
+  }
+  -webkit-justify-content: $justify;
+  justify-content: $justify;
+}
+// flex-wrap, flex-column
+@mixin flex-direction($value: row) {
+  @if $value == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: reverse;
+    -moz-box-orient: horizontal;
+  } @else if $value == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+  } @else if $value == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -moz-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $value !important;
+  -ms-flex-direction: $value !important;
+  flex-direction: $value !important;
+}
+
+@mixin flex-wrap($value: nowrap) {
+  // No Webkit/FF Box fallback.
+  -webkit-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  background: none;
+  border: 0px;
+  cursor: pointer;
+}
+
+img, button, a, input, textarea {
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: #000;
+}
+
+input::-moz-placeholder {
+  color: #000;
+}
+
+/* Firefox 19+ */
+input:-moz-placeholder {
+  color: #000;
+}
+
+/* Firefox 18- */
+input:-ms-input-placeholder {
+  color: #000;
+}
+
+strong {
+  font-weight: bold;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+nav, output, ruby, section,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
